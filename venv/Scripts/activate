@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Usuario\Documents\python\proyecto_fullstack_mysql\venv"
+VIRTUAL_ENV="C:\Users\Usuario\Documents\python\sistema-reservas\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

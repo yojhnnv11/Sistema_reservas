@@ -17,3 +17,23 @@ def crear(data: CanchaCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(c)
     return c
+
+@router.put("/{id}", response_model=CanchaSchema)
+def actualizar(id: int, data: CanchaCreate, db: Session = Depends(get_db)):
+    c = db.query(CanchaModel).filter(CanchaModel.id == id).first()
+    if not c:
+        raise HTTPException(status_code=404, detail="Cancha no encontrada")
+    for key, value in data.dict().items():
+        setattr(c, key, value)
+    db.commit()
+    db.refresh(c)
+    return c
+
+@router.delete("/{id}")
+def eliminar(id: int, db: Session = Depends(get_db)):
+    c = db.query(CanchaModel).filter(CanchaModel.id == id).first()
+    if not c:
+        raise HTTPException(status_code=404, detail="Cancha no encontrada")
+    db.delete(c)
+    db.commit()
+    return {"detail": "Cancha eliminada"}
